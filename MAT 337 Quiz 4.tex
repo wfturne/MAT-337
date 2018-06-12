@@ -1,0 +1,176 @@
+\documentclass[12pt,answers]{exam}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz,dcolumn,enumitem,fp,stmaryrd,rotating,etoolbox,cases}
+\usetikzlibrary{decorations.markings}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcolumntype{2}{D{.}{}{2.0}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\setlist[enumerate]{itemsep=0mm}
+\pagestyle{empty}
+\errorcontextlines 10000
+
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+\AtBeginEnvironment{numcases}{\setcounter{equation}{0}}
+\begin{document}
+
+\title{MAT 337 Quiz 4} 
+\author{Billy Turner}
+\maketitle
+\thispagestyle{empty}
+
+\begin{problem}{1}
+State \textbf{precisely} and \textbf{completely} the definition of the following:
+\begin{enumerate}[label=(\alph*)]
+\item a linear transformation $T:V\rightarrow W$, where $V$ and $W$ are vector spaces over a field $\F$;
+\item the image $f(A)$ under a function $f:X\rightarrow Y$ of a subset $A$ of $X$;
+\item the pre-image $f^{-1}(B)$ under a function $f:X\rightarrow Y$ of a subset $B$ of $Y$;
+\item the kernel and nullity of a linear transformation $T:V\rightarrow W$;
+\item the image and rank of a linear transformation $T:V\rightarrow W$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+\item Let $V$ and $W$ be vector spaces over the field $\F$. A function $f:V\rightarrow W$ is called a linear transformation if for every $\vec{u},\vec{v}\in V$ and $\alpha \in \F$, the following properties hold:
+\begin{align*}
+	&\text{(1) } f(\vec{u}+\vec{v})=f(\vec{u})+f(\vec{v}) \text{, and} \\
+	&\text{(2) } f(\alpha \vec{u})=\alpha f(\vec{u}).
+\end{align*}
+\item Let $f:X\rightarrow Y$ be a function and $A\subseteq X$. We define the image of $A$ under $f$ to be
+\begin{align*}
+	f(A)=\{f(a)|a\in A\}\subseteq Y.
+\end{align*}
+\item Let $f:X\rightarrow Y$ be a function, and $B\subseteq Y$. We define the pre-image of $B$ under $f$ to be
+\begin{align*}
+	f^{-1}(B)=\{a\in X|f(a)\in B\}\subseteq X.
+\end{align*}
+\item Let $V$ and $W$ be vector spaces over $\F$ and $T:V\rightarrow W$ a linear transformation. We define the kernel (or null space) of $T$ to be
+\begin{align*}
+	kerT:=\{\vec{u}\in V|T(\vec{u})=\vec{0}_W\}.
+\end{align*}
+In addition, we define the nullity of $T$ to be the dimension of the the kernel of $T$.
+\item Let $V$ and $W$ be vector spaces over $\F$ and $T:V\rightarrow W$ a linear transformation. We define the image (or range) of $T$ to be
+\begin{align*}
+	R(T)=T(V).
+\end{align*}
+In addition, we define the rank of $T$ to be the dimension of the range of $T$. 
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{2}
+Decide if the following functions $T$ are linear transformations. Justify your answers. 
+\begin{enumerate}[label=\roman*)]
+\item $T:\R^{3}\rightarrow \R^{2}$ defined by $T(a,b,c)=(a-b,2c)$;
+\item $T:\R^{3}\rightarrow \R^{2}$ defined by $T(a,b,c)=(a+2b,c^{2})$;
+\item $T:M_{2\times 2}(\R)\rightarrow \R$ defined by $T\Bigl( \begin{matrix}a & b\\ c & d\end{matrix}\Bigr)=a^{2}+2d$.
+\item $T:P(\R,x)\rightarrow P(\R,x)$ defined by $T(f)=xf'-2f$ where $f'$ deontes the first derivative of $f$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=\roman*)]
+\item We claim that $T:\R^{3}\rightarrow \R^{2}$ defined by $T(a,b,c)=(a-b,2c)$ is a linear transformation. Choose any $\vec{u},\vec{v}\in \R^{3}$ and $\alpha\in \R$. Consider $\vec{u}=(a_{1},b_{1},c_{1})$ and $\vec{v}=(a_{2},b_{2},c_{2})$ for any $a_{1},b_{1},c_{1},a_{2},b_{2},c_{2}\in \R$. First, we observe
+\begin{align*}
+	T(\vec{u}+\vec{v})&=T((a_{1},b_{1},c_{1})+(a_{2},b_{2},c_{2})), \\
+  	&=T((a_{1}+a_{2}), (b_{1}+b_{2}), (c_{1}+c_{2})) \text{, by definition of + of $\R^{3}$,} \\
+   	&=((a_{1}+a_{2})-(b_{1}+b_{2}),2(c_{1}+c_{2})) \text{, by definition of $T$.}
+\end{align*}
+In addition, we observe
+\begin{align*}
+	T(\vec{u})+T(\vec{v})&=T((a_{1},b_{1},c_{1}))+T((a_{2},b_{2},c_{2})), \\
+    &=(a_{1}-b_{1},2c_{1})+(a_{2}-b_{2},2c_{2}) \text{, by definition of $T$,} \\
+    &=((a_{1}-b_{1})+(a_{2}-b_{2}),2c_{1}+2c_{2}) \text{, by definition of + of $\R^{2}$,} \\
+    &=((a_{1}+a_{2})-(b_{1}+b_{2}),2(c_{1}+c_{2})). 
+\end{align*}
+Thus, $T(\vec{u}+\vec{v})=T(\vec{u})+T(\vec{v})$. Second, consider
+\begin{align*}
+	T(\alpha \vec{u})&=T(\alpha(a_{1},b_{1},c_{1})) \\
+    &=T(\alpha a_{1},\alpha b_{1},\alpha c_{1}) \text{, by definition of $\cdot$ of $\R^{3}$,} \\ 
+    &=(\alpha a_{1}-\alpha b_{1},2\alpha c_{1}) \text{, by definition of $T$.}
+\end{align*}
+In addition, we observe
+\begin{align*}
+	\alpha T(\vec{u})&=\alpha T((a_{1},b_{1},c_{1})), \\
+    &=\alpha (a_{1}-b_{1}, 2c_{1}) \text{, by definition of $T$,} \\
+    &=(\alpha (a_{1}-b_{1}), 2\alpha c_{1}) \text{, by definition of $\cdot$ of $\R^{2}$,} \\
+    &=(\alpha a_{1}-\alpha b_{1},2\alpha c_{1}).
+\end{align*}
+Thus, $T(\alpha \vec{u})=\alpha T(\vec{u})$. Therefore, by the definition of linear transformation, $T$ is a linear transformation.
+\item We claim that $T:\R^{3}\rightarrow \R^{2}$ defined by $T(a,b,c)=(a+2b,c^{2})$ is not a linear transformation. Consider $\vec{u}=(0,0,1)\in \R^{3}$ and $\alpha=2\in\R$. We observe
+\begin{align*}
+	T(\alpha \vec{u})&=T(2(0,0,1)), \\
+	&=T((0,0,2)), \\
+	&=(0+2(0),(2)^2), \\
+	&=(0,4),
+\end{align*} and
+\begin{align*} 
+	\alpha T(\vec{u})&=2T((0,0,1)), \\
+	&=2(0+2(0),(1)^2), \\
+	&=2(0,1) \\
+	&=(0,2)
+\end{align*}
+Thus, $T(\alpha \vec{u})\neq\alpha T(\vec{u})$ for every $\vec{u} \in \R^{3}$ and $\alpha \in\R$. Therefore, by the definition of linear transformation, $T$ is not a linear transformation.
+\item We claim that $T:M_{2\times 2}(\R)\rightarrow \R$ defined by $T\Bigl( \begin{matrix}a & b\\ c & d\end{matrix}\Bigr)=a^{2}+2d$ is not a linear transformation. Consider A=$\Bigl( \begin{matrix}1 & 0\\ 0 & 0\end{matrix}\Bigr)\in M_{2\times 2}(\R)$ and $\alpha=2\in\R$. We observe
+\begin{align*}
+	T(\alpha A)&=T\Bigl(2\Bigl( \begin{matrix}1 & 0\\ 0 & 0\end{matrix}\Bigr)\Bigr), \\
+	&=T\Bigl( \begin{matrix}2 & 0\\ 0 & 0\end{matrix}\Bigr), \\
+	&=(2)^2+2(0), \\
+	&=4,
+\end{align*} and
+\begin{align*}
+	\alpha T(A)&=2T\Bigl( \begin{matrix}1 & 0\\ 0 & 0\end{matrix}\Bigr), \\
+	&=2((1)^2+2(0)), \\
+	&=2(1), \\
+	&=2.
+\end{align*} Thus, $T(\alpha A)\neq \alpha T(A)$ for every $A\in M_{2\times 2}(\R)$ and $\alpha\in\R$. Therefore, by the definition of linear transformation, $T$ is not a linear transformation.
+\item We claim that $T:P(\R,x)\rightarrow P(\R,x)$ defined by $T(f)=xf'-2f$ where $f'$ deontes the first derivative of $f$ is a linear transformation. Choose any $f,g\in P(\R,x)$ and $\alpha\in \R$.  
+First, we observe
+\begin{align*}
+	T(f+g)&=x(f+g)'-2(f+g) \text{, by definition of $T$,} \\
+	&=x(f'+g')-2(f+g) \text{, by properties of the first derivatives of $f$ and $g$,} \\
+	&=xf'+xg'-2f-2g \text{, by Distribution Law \#1 of $P(\R,x)$,} \\
+	&=(xf'-2f)+(xg'-2g) \text{, by associativity and commutativity of + of $P(\R,x)$,} \\
+	&=T(f)+T(g) \text{, by definition of $T$.}
+\end{align*} Thus, $T(f+g)=T(f)+T(g)$. Now consider
+\begin{align*}
+	T(\alpha f)&=x(\alpha f)'-2(\alpha f) \text{, by definition of $T$,} \\
+	&=x\alpha f'-2\alpha f \text{, by properties of the first derivative of $f$,} \\
+	&=\alpha(xf')-\alpha(2f) \text{, by associativity of $\cdot$ of $P(\R,x)$,} \\
+	&=\alpha(xf'-2f) \text{, by Distribution Law \#1 of $P(\R,x)$,} \\
+	&=\alpha T(f) \text{, by definition of $T$.}
+\end{align*} Thus, $T(\alpha f)=\alpha T(f)$. Therefore, by the definition of linear transformation, $T$ is a linear transformation.
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{3}
+Problem 13 on page 75 of the text book.
+\end{problem}
+
+\begin{solution}
+Let $V$ and $W$ be vector spaces over a field $\F$, $T:V\rightarrow W$ a linear transformation, and $\{w_{1},w_{2},...,w_{k}\}$ a linearly independent subset of $R(T)$. Consider $S=\{v_{1},v_{2},...,v_{k}\}$ such that $T(v_{i})=w_{i}$ for every $i \in \{1,2,...,k\}$. We observe
+\begin{align}
+	c_{1}v_{1}+c_{2}v_{2}+...+c_{k}v_{k}=\vec{0}_{V}
+\end{align}
+for some $c_{i}'s\in \F$. Applying $T$ to both sides of the equation above, we observe
+\begin{align*}
+	T(c_{1}v_{1}+c_{2}v_{2}+...+c_{k}v_{k})=T(\vec{0}_{V}).
+\end{align*} 
+Since $T$ is a linear transformation, $T$ preserves addition and scalar multiplication. Additionally, $T(\vec{0}_{V})=\vec{0}_{W}$ by a lemma prove previously (linear transformations preserve zero vectors). We observe from these facts
+\begin{align*}
+	T(c_{1}v_{1})+T(c_{2}v_{2})+...+T(c_{k}v_{k})&=\vec{0}_{W}, \\
+	c_{1}T(v_{1})+c_{2}T(v_{2})+...+c_{k}T(v_{k})&=\vec{0}_{W}. 
+\end{align*}
+And since $T(v_{i})=w_{i}$ for every $i \in \{1,2,...,k\}$ as assumed,
+\begin{align*}
+	c_{1}w_{1}+c_{2}w_{2}+...+c_{k}w_{k}&=\vec{0}_{W}. 
+\end{align*}
+Since $\{w_{1},w_{2},...,w_{k}\}$ is linearly independent, only the trivial linear combination is equal to $\vec{0}_{W}$, this implies that $c_{1}=c_{2}=...=c_{k}=0$. Since $c_{1}=c_{2}=...=c_{k}=0$, this implies that (1) is only true for the trivial linear combination. Thus, $S$ is linearly independent by definition of linear independence.
+\end{solution}
+
+\end{document}

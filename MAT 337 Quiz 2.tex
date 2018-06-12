@@ -1,0 +1,214 @@
+\documentclass[12pt,answers]{exam}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz,dcolumn,enumitem,fp,stmaryrd,rotating,etoolbox,cases}
+\usetikzlibrary{decorations.markings}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcolumntype{2}{D{.}{}{2.0}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\setlist[enumerate]{itemsep=0mm}
+\pagestyle{empty}
+\errorcontextlines 10000
+
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+\AtBeginEnvironment{numcases}{\setcounter{equation}{0}}
+\begin{document}
+
+\title{MAT 337 Quiz 2} 
+\author{Billy Turner}
+\maketitle
+\thispagestyle{empty}
+
+\begin{problem}{1}
+State \textbf{precisely} and \textbf{completely} the definition of the following:
+\begin{enumerate}[label=(\alph*)]
+\item a function $f$ from a set $A$ to a set $B$;
+\item a subspace $W$ of a vector space $V$ over a field $\mathbb{F}$;
+\item a linear combination of vectors of a subset $S$ of a vector space $V$ over a field $\mathbb{F}$;
+\item Span$S$ of a subset $S$ of a vector space $V$ over a field $\mathbb{F}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+\item A \textbf{function} $f$ from a set $A$ to a set $B$ is a rule which assigns to every element of $A$ a unique element of $B$. We denote $f$ by
+\begin{align*}
+f:A\rightarrow B
+\end{align*}
+and call $A$ the domain of $f$ and B the codomain of $f$.
+\item Let $V$ be a vector space over $\mathbb{F}$ and $W$ a non-empty subset of $V$. We call $W$ a \textbf{subspace} of $V$ if $W$ with the operations of addition and scalar multiplication is a vector space over $\mathbb{F}$.
+\item Let $V$ be a vector space over $\mathbb{F}$ and $S$ a non-empty subset of $V$. A vector $\vec{u}$ is called a \textbf{linear combination} of vectors of $S$ if
+\begin{align*}
+\vec{u}=c_{1}\vec{v}_{1}+c_{2}\vec{v}_{2}+...+c_{n}\vec{v}_{n}
+\end{align*}
+for some $v_{i}'s\in S$ and $c_{i}'s\in \mathbb{F}$. 
+\item Let $V$ be a vector space over $\mathbb{F}$ and $S$ a non-empty subset of $V$. We denote by Span$S$ the set of all linear combinations of vectors of $S$. 
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{2}
+Decide if the following given subset $W$ is a vector subspace of the given vector space $V$. Justify your answers.
+\begin{enumerate}[label=(\alph*)]
+\item $V=\mathbb{R}^{3}$ and $W$ is the subset of all the elements $(a,b,c)\in V$ such that $2b=3c$.
+\item $V=\mathbb{R}^{3}$ and $W$ is the subset of all the elements $(a,b,c)\in V$ such that $a^{2}-bc=0$.
+\item $V= \mathcal{F}(\mathbb{R},\mathbb{R})$ and $W$ is the subset of all the elements $f\in V$ such that $f(1)+5f(2)=0$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+\item Let $V=\mathbb{R}^{3}$ and $W$ be the subset of all the elements $(a,b,c)\in V$ such that $2b=3c$. 
+
+	\underline{\textit{1st}}: The zero vector $\vec{0}_{v}=(0,0,0)\in W$ by the definition of the subset $W$.
+	
+	\underline{\textit{2nd}}: For every $\vec{u},\vec{v} \in W$, we wish to show that $\vec{u}+\vec{v}\in W$. Consider $\vec{u}=(a_1,b_1,c_1)$ and $\vec{v}=(a_2,b_2,c_2)$ for some 		$a_1,a_2,b_1,b_2,c_1,c_2\in \mathbb{R}$. In addition, based on the definition of $W$, we observe
+	\begin{align}
+		2b_1 &= 3c_1\text{, and} \\
+		2b_2 &= 3c_2.
+	\end{align}
+	Now consider the sum of $\vec{u}$ and $\vec{v}$
+	\begin{align*}
+		\vec{u}+\vec{v} &= (a_1,b_1,c_1) + (a_2,b_2,c_2) \\
+		&= (a_1+a_2,b_1+b_2,c_1+c_2),
+	\end{align*}
+	by the definition of the addition of elements of $W$. To show that $\vec{u}+\vec{v} \in W$, we observe
+	\begin{align*}
+		2(b_1+b_2) &= 2b_1+2b_2 \text{, by Distribution Law \#1 of $W$,} \\
+		&= 3c_1+3c_2 \text{, by (1) and (2) above,} \\
+		&= 3(c_1+c_2) \text{, by Distribution Law \#1 of $W$.}
+	\end{align*}
+	Since $2(b_1+b_2)=3(c_1+c_2)$, thus $\vec{u}+\vec{v} \in W$. 
+	
+	\underline{\textit{3rd}}: For every $\vec{u} \in W$ and $\alpha\in \mathbb{R}$, we wish to show that $\alpha\vec{u}\in W$. Consider $\vec{u}=(a,b,c)$ for some $a,b,c\in W$. In 			addition, based on the definition of $W$, we observe
+	\begin{align}
+		2b &= 3c.
+	\end{align}
+	Now consider,
+	\begin{align*}
+		\alpha\vec{u} &= \alpha(a,b,c) \\
+		&= (\alpha a,\alpha b, \alpha c),
+	\end{align*}
+	by the definition of scalar multiplication of $W$. To show that $\alpha\vec{u}\in V$, we observe,
+	\begin{align*}
+		2(\alpha b &)= \alpha (2b) \text{, by the Commutative Property of $\mathbb{R}$,} \\
+		&= \alpha (3c) \text{, by (1) above} \\
+		&= 3(\alpha c) \text{, by the Commutative Property of $\mathbb{R}$.}
+	\end{align*}
+	Since $2(\alpha b) = 3(\alpha c$), thus $\alpha\vec{u}\in W$.
+	
+	Finally, by the Highway for subspaces, $W$ is a subspace of $V$. 
+	
+\item $W$ as defined in (b) above is not a subspace of $V=\mathbb{R}^{3}$. Consider $(1,1,1),(4,2,8)\in W$ by the definition of $W$. However,
+	\begin{align*}
+		(1,1,1)+(4,2,8)=(5,3,9)\notin W
+	\end{align*}
+	since $5^2-(3)(9)\neq0$. Thus, by the Highway for subspaces, $W$ is not a subspace of $V$.
+	
+\item \underline{\textit{1st}}: The zero vector 
+	\begin{align*}
+		\vec{0}_{v}: \mathbb{R} \rightarrow \mathbb{R}
+	\end{align*}
+	is in $W$ since 
+	\begin{align*}
+		\vec{0}_{v}(1)+5\vec{0}_{v}(2)=0+0=0.
+	\end{align*}
+	
+	\underline{\textit{2nd}}: For every $f,g \in W$, we wish to show that $f+g\in W$. Based on the definition of $W$, we observe,
+	\begin{align}
+		f(1)+5f(2) &= 0 \text{, and} \\
+		g(1)+5g(2) &= 0	
+	\end{align}
+	In addition, for every $t\in\mathbb{R}$, we observe
+	\begin{align*}
+		(f+g)(t)=f(t)+g(t)
+	\end{align*}
+	by the definition of addition of $W$. 
+	To show that $f+g\in W$, we observe
+	\begin{footnotesize}
+	\begin{align*}
+		(f+g)(1)+5(f+g)(2) &= (f(1)+g(1))+5(f(2)+g(2)) \text{, by the definition of addition of $W$,} \\
+		&= f(1)+g(1)+5f(2)+5g(2) \text{, by the Distributive Law \#1 of $W$, } \\
+		&= (f(1)+5f(2))+(g(1)+5g(2)) \text{, by the Associative and } \\ &\hspace{5.5 cm}{\text{Commutative properties of $\mathbb{R}$,}} \\
+		&= 0 + 0 \text{, by (1) and (2) above,} \\
+		&=0.
+	\end{align*}
+	\end{footnotesize}
+	Since $(f+g)(1)+5(f+g)(2)=0$, thus, $f+g\in W$. 
+	
+	\underline{\textit{3rd}}: For every $f\in W$ and $\alpha\in \mathbb{R}$, we wish to show that $\alpha f\in W$. Based on the definition of $W$, we observe
+	\begin{align}
+		f(1)+5f(2) &= 0
+	\end{align}
+	In addition, for every $t\in\mathbb{R}$, we observe
+	\begin{align*}
+		(\alpha f)(t)=\alpha f(t),
+	\end{align*}
+	by the definition of scalar multiplication of $W$. To show that $\alpha f\in V$, we observe,
+	\begin{small}
+	\begin{align*}
+		(\alpha f)(1)+5(\alpha f)(2) &= \alpha f(1)+5(\alpha f(2)) \text{, by the definition of scalar multiplication of $W$,} \\
+		&= \alpha f(1)+\alpha(5f(2)) \text{, by the Associate property of multiplication of $\mathbb{R}$,} \\
+		&= \alpha (f(1)+5f(2)) \text{, by the Distributive Law \#1 of $\mathbb{R}$,} \\
+		&= \alpha (0) \text{, by (1) above,} \\
+		&= 0.
+	\end{align*}
+	\end{small}
+	Since $(\alpha f)(1)+5(\alpha f)(2)=0$, thus $\alpha f \in W$.
+	
+	Finally, by the Highway for subspaces, $W$ is a subspace of $V$. 
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{3}
+Problems 5b) and 5g) on page 34. \textbf{Justify your answers}. 
+\end{problem}
+
+\begin{solution}
+
+\noindent \textbf{5b)} Given the vector $(-1,2,1)$ and the set $S=\{(1,0,2), (-1,1,1)\}$, we wish to determine if $(-1,2,1)\in \text{Span}S$. If $(-1,2,1)\in \text{Span}S$, then it can be written as a linear combination of vectors of $S$, or 
+\begin{align*}
+	(-1,2,1) &= c_{1}(1,0,-2)+c_{2}(-1,1,1)
+\end{align*}
+for some $c_{1},c_{2}\in \mathbb{R}$. Now, we observe
+\begin{align*}
+	(-1,2,1) &= (c_{1}, 0, -2c_{1})+(-c_{2},c_{2},c_{2}), \\
+	(-1,2,1) &= (c_{1}-c_{2}, c_{2}, -2c_{1}+c_{2}).
+\end{align*}
+From this linear combination, we can generate a system of linear equations as follows:
+\begin{numcases}
+\\
+-1 = c_{1}-c_{2} \\
+2 = c_{2} \\
+1 = -2c_{1}+c_{2}
+\end{numcases}
+Substituting (2) into (1), we observe $-1=c_{1}-2$ which implies that $c_{1}=1$. In addition, substituting (2) into (3) yields $1=-2c_{1}+2$, which implies that $c_{1}=\frac{1}{2}$. Thus, $1=\frac{1}{2}$, which is a contradiction. Thus, $(-1,2,1)\notin \text{Span}S$.
+
+\noindent \textbf{5b)} Given the vector $\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr)$, and the set $S=\Bigl\{ \Bigl( \begin{matrix}1 & 0\\ -1 & 0\end{matrix}\Bigr), \Bigl( \begin{matrix}0 & 1\\ 0 & 1\end{matrix}\Bigr), \Bigl( \begin{matrix}1 & 1\\ 0 & 0\end{matrix}\Bigr) \Bigr\}$, we wish to determine if $\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr)\in \text{Span}S$. If $\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr)\in \text{Span}S$, then it can be written as a linear combination of vectors of $S$, or
+\begin{align*}
+	\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr)=c_{1}\Bigl( \begin{matrix}1 & 0\\ -1 & 0\end{matrix}\Bigr)+c_{2}\Bigl( \begin{matrix}0 & 1\\ 0 & 1\end{matrix}\Bigr)					+c_{3}\Bigl( \begin{matrix}1 & 1\\ 0 & 0\end{matrix}\Bigr)
+\end{align*}
+for some $c_{1},c_{2},c_{3}\in \mathbb{R}$. Now, we observe
+\begin{align*}
+	\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr) &= \Bigl( \begin{matrix}c_{1} & 0\\ -c_{1} & 0\end{matrix}\Bigr)+\Bigl( \begin{matrix}0 & c_{2}\\ 0 & c_{2}\end{matrix}\Bigr)					+\Bigl( \begin{matrix}c_{3} & c_{3}\\ 0 & 0\end{matrix}\Bigr) \\
+	\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr) &= \Bigl( \begin{matrix} c_{1}+c_{3} & c_{2}+c_{3}\\ -c_{1} & c_{2}\end{matrix}\Bigr). 
+\end{align*}
+From this linear combination, we can generate a system of linear equations as follows:
+\begin{numcases}
+\\
+1 = c_{1}+c_{3} \\
+2 = c_{2}+c_{3}  \\
+-3 = -c_{1} \\
+4 = c_{2}
+\end{numcases}
+From this system, we observe that $c_{1}=3$ and $c_{2}=4$. Substituting (3) into (1), we observe $1=3+c_{3}$, which implies that $c_{3}=-2$. Substituting (4) into (2), we observe $2=4+c_{3}$, which also implies that $c_{3}=-2$. Thus, a solution to system exists, which implies that
+\begin{align*}
+	 \Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr)=3\Bigl( \begin{matrix}1 & 0\\ -1 & 0\end{matrix}\Bigr)+4\Bigl( \begin{matrix}0 & 1\\ 0 & 1\end{matrix}\Bigr)						+-2\Bigl( \begin{matrix}1 & 1\\ 0 & 0\end{matrix}\Bigr).
+\end{align*}
+Finally, since  $\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr)$ can be written as a linear combination of vectors of $S$, thus $\Bigl( \begin{matrix}1 & 2\\ -3 & 4\end{matrix}\Bigr)\in \text{Span}S$.
+\end{solution}
+
+
+\end{document}q

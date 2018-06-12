@@ -1,0 +1,200 @@
+\documentclass[12pt,answers]{exam}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz,dcolumn,enumitem,fp,stmaryrd,rotating}
+\usetikzlibrary{decorations.markings}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcolumntype{2}{D{.}{}{2.0}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\setlist[enumerate]{itemsep=0mm}
+\pagestyle{empty}
+\errorcontextlines 10000
+
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{MAT 337 Definitions} 
+\author{Billy Turner}
+\maketitle
+\thispagestyle{empty}
+
+\section{Chapter 1: Vector Spaces}
+\begin{definition}{Vector Space}
+Let $\mathbb{F}$ be a field and $V$ a non-empty set with two operations, addition and scalar multiplication, defined as follows:
+\begin{align*}
+	&\text{addition } (+):  V \times V \rightarrow V \text{, and} \\
+	&\text{scalar multiplication } (\cdot): \mathbb{F} \times V \rightarrow V
+\end{align*}
+We say that $V$ is a vector space over $\mathbb{F}$ if the following properties hold:
+\newline\newline\noindent
+\underline{VS 0}: (Closedness of + and $\cdot$) For every $\vec{u},\vec{v}\in V$ and for every $\alpha\in \mathbb{F}$,
+\begin{align*}
+	\vec{u}+\vec{v},\text{ } \alpha\vec{u}\in V.
+\end{align*}
+\noindent
+\underline{VS 1}: (Associativity of +) For every $\vec{u},\vec{v},\vec{w}\in V$,
+\begin{align*}
+	(\vec{u}+\vec{v})+\vec{w}=\vec{u}+(\vec{v}+\vec{w}).
+\end{align*}
+\noindent
+\underline{VS 2}: (Commutativity of +) For every $\vec{u},\vec{v}\in V$,
+\begin{align*}
+	\vec{u}+\vec{v}=\vec{v}+\vec{u}.
+\end{align*}
+\noindent
+\underline{VS 3}: (Existence of $\vec{0}_{V}$) There exists $\vec{0}_{V}\in V$, such that, for every $\vec{u}\in V$
+\begin{align*}
+	\vec{u}+\vec{0}_{V}=\vec{u}.
+\end{align*}
+We call $\vec{0}_{V}$ the zero vector of $V$.
+\newline\newline\noindent
+\underline{VS 4}: (Existence of additive inverse) For every $\vec{u}\in V$, there exists $\vec{w}\in V$ such that,
+\begin{align*}
+	\vec{u}+\vec{w}=\vec{0}_{V}.
+\end{align*}
+We call $\vec{w}$ the additive inverse of $\vec{u}$ and denote it by $(-\vec{u})$.
+\newline\newline\noindent
+\underline{VS 5}: (Behavior of $1\in \mathbb{F}$) For every $\vec{u}\in V$,
+\begin{align*}
+	1\cdot \vec{u}=\vec{u}.
+\end{align*}
+\noindent
+\underline{VS 6}: (Associativity of $\cdot$) For every $\vec{u}\in V$ and for every $\alpha, \beta \in \mathbb{F}$,
+\begin{align*}
+	(\alpha\beta)\cdot\vec{u}=\alpha\cdot(\beta\vec{u}).
+\end{align*}
+\underline{VS 7}: (Distribution Law \#1) For every $\vec{u},\vec{v}\in V$ and for every $\alpha\in \mathbb{F}$,
+\begin{align*}
+	\alpha\cdot(\vec{u}+\vec{v})=\alpha\cdot\vec{u}+\alpha\cdot\vec{v}.
+\end{align*}
+\underline{VS 8}: (Distribution Law \#2) For every $\vec{u}\in V$ and for every $\alpha, \beta \in \mathbb{F}$,
+\begin{align*}
+	(\alpha+\beta)\cdot\vec{u}=\alpha\cdot\vec{u}+\beta\cdot\vec{u}
+\end{align*}
+\end{definition}
+
+\begin{definition}{Function}
+Let $A$ and $B$ be sets. A function $f$ from $A$ to $B$ is a rule which assigns to every element of $A$ a unique element of $B$. In this case, we denote $f$ by,
+\begin{align*}
+	f:A\rightarrow B
+\end{align*}
+and call $A$ the domain of $f$ and $B$ the codomain of $f$.
+\end{definition}
+
+\begin{definition}{Subspace}
+Let $V$ be a vector space over $\mathbb{F}$, and W a non-empty subset of $V$. We say that $W$ is a subspace of $V$ if $W$ with the addition and scalar multiplication of $V$ is a vector space over $\mathbb{F}$.
+\end{definition}
+
+\begin{definition}{Linear Combination} 
+Let $V$ be a vector space over $\mathbb{F}$ and $S$ a non-empty subset of $V$. A vector $\vec{u}$ is called a linear combination of vectors of $S$ if
+\begin{align*}
+	\vec{u}=c_{1}\vec{v}_{1}+c_{2}\vec{v}_{2}+...+c_{n}\vec{v}_{n}
+\end{align*}
+for some $v_{i}'s\in S$ and $c_{i}'s\in \mathbb{F}$. 
+\end{definition}
+
+\begin{definition}{Span} 
+Let $V$ be a vector space over $\mathbb{F}$ and $S$ a non-empty subset of $V$. We denote by Span$S$ the set of all linear combinations of vectors of $S$.
+\end{definition}
+
+\begin{definition}{Generate (Generating Set)} 
+Let V be a vector space over $\mathbb{F}$, and $S\subseteq V$. We say that $S$ generates $V$ over $\mathbb{F}$ if Span$S$=$V$. In this case, we also say that $S$ is a generating set of $V$.
+\end{definition}
+
+\begin{definition}{Linearly Dependent}
+Let $V$ be a vector space over $\mathbb{F}$, and $S\subseteq V$. We say $S$ is linearly dependent if
+\begin{align*}
+	c_{1}\vec{u}_{1}+c_{2}\vec{u}_{2}+...+c_{n}\vec{u}_{n}=\vec{0}_{V}
+\end{align*}
+for some $\vec{u}_{1},\vec{u}_{2},...,\vec{u}_{n}\in S$ and $c_{1},c_{2},...,c_{n}\in \mathbb{F}$ some of which are nonzero. In this case, we also say the vectors of $S$ are linearly dependent.
+\end{definition}
+
+\begin{definition}{Linearly Independent}
+Let $V$ be a vector space over $\mathbb{F}$, and $S\subseteq V$. We say $S$ is linearly independent if $S$ is not linearly dependent. In this case, we also say the vectors of $S$ are linearly independent.
+\end{definition}
+
+\begin{definition}{Basis}
+Let $V$ be a vector space over $\mathbb{F}$, and $S\subseteq V$. We say that $S$ is a basis of $V$ if $S$ is a linearly independent generating set of $V$. 
+\end{definition}
+
+\begin{definition}{Dimension}
+Let $V$ be a vector space over $\mathbb{F}$ which can be generated by a finite set. We define the dimension of $V$ as the number of vectors in a basis of $V$. 
+\end{definition}
+
+\section{Chapter 2: Linear Transformations and Matrices}
+\begin{definition}{Linear Transformation}
+Let $V$ and $W$ be vector spaces over the field $\F$. A function $f:V\rightarrow W$ is called a linear transformation if for every $\vec{u},\vec{v}\in V$ and $\alpha \in \F$, the following properties hold:
+\begin{align*}
+	&\text{(1) } f(\vec{u}+\vec{v})=f(\vec{u})+f(\vec{v}) \text{, and} \\
+	&\text{(2) } f(\alpha \vec{u})=\alpha f(\vec{u}).
+\end{align*}
+\end{definition}
+
+\begin{definition}{Image}
+Let $f:X\rightarrow Y$ be a function and $A\subseteq X$. We define the image of $A$ under $f$ to be
+\begin{align*}
+	f(A)=\{f(a)|a\in A\}.
+\end{align*}
+\end{definition}
+
+\begin{definition}{Pre-Image}
+Let $f:X\rightarrow Y$ be a function, and $B\subseteq Y$. We define the pre-image of $B$ under $f$ to be
+\begin{align*}
+	f^{-1}(B)=\{a\in X|f(a)\in B\}.
+\end{align*}
+\end{definition}
+
+\begin{definition}{Kernel and Nullity}
+Let $V$ and $W$ be vector spaces over $\F$ and $T:V\rightarrow W$ a linear transformation. We define the kernel (or null space) of $T$ to be
+\begin{align*}
+	kerT:=\{\vec{u}\in V|T(\vec{u})=\vec{0}_W\}.
+\end{align*}
+In addition, we define the nullity of $T$ to be the dimension of the the kernel of $T$. 
+\end{definition}
+
+\begin{definition}{Image and Rank}
+Let $V$ and $W$ be vector spaces over $\F$ and $T:V\rightarrow W$ a linear transformation. We define the image (or range) of $T$ to be
+\begin{align*}
+	R(T)=T(V).
+\end{align*}
+In addition, we define the rank of $T$ to be the dimension of the range of $T$. 
+\end{definition}
+
+\begin{definition}{One-to-One or Injective}
+Let $f:X\rightarrow T$ be a function. We say $f$ is one-to-one or injective if for any $a,b\in X$ $f(a)=f(b)$ implies that $a=b$.
+\end{definition}
+
+\begin{definition}{Onto or Surjective}
+Let $f:X\rightarrow T$ be a function. We say $f$ is onto or surjective if for any $y\in Y$, there exists $x\in X$ such that $f(x)=y$.
+\end{definition}
+
+\begin{definition}{Isomorphism of Vector Spaces}
+Let $V$ and $W$ be vector spaces over a field $\F$, and $T:V\rightarrow W$ a linear transformation. We say that $T$ is an isomorphism of vector spaces if $T$ is one-to-one and onto.
+\end{definition}
+
+\begin{definition}{Isomorphic Vector Spaces}
+Let $V$ and $W$ be vector spaces over a field $\F$. We say that $V$ and $W$ are isomorphic if there exists a isomorphism $T:V\rightarrow W$. In this case, we denote by $V\simeq W$. 
+\end{definition}
+
+\begin{definition}{Composition of Functions}
+Let $f:A\rightarrow B$ and $g:B\rightarrow C$ be functions. We define the composition of $g$ and $f$ to be
+\begin{align*}
+	(g\circ f):&A\rightarrow C \\
+	& a \rightarrow g(f(a)).
+\end{align*}
+\end{definition}
+
+\begin{definition}{Inverse Functions}
+Let $f:A\rightarrow B$ be a bijective function. We define the inverse function of $f$ to be
+\begin{align*}
+	f^{-1}:B\rightarrow A
+\end{align*} such that for any $b\in B$, $f^{-1}(b)$ is the unique element $a\in A$ such that $f(a)=b$.
+\end{definition}
+
+\end{document}
