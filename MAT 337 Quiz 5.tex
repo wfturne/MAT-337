@@ -1,0 +1,212 @@
+\documentclass[12pt,answers]{exam}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz,dcolumn,enumitem,fp,stmaryrd,rotating,etoolbox,cases}
+\usetikzlibrary{decorations.markings}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcolumntype{2}{D{.}{}{2.0}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\setlist[enumerate]{itemsep=0mm}
+\pagestyle{empty}
+\errorcontextlines 10000
+
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+\AtBeginEnvironment{numcases}{\setcounter{equation}{0}}
+\begin{document}
+
+\title{MAT 337 Quiz 5} 
+\author{Billy Turner}
+\maketitle
+\thispagestyle{empty}
+
+\begin{problem}{1}
+State \textbf{precisely} and \textbf{completely} the definition of the following:
+\begin{enumerate}[label=(\alph*)]
+\item a one-to-function $f:A\rightarrow B$;
+\item an onto function $f:A\rightarrow B$;
+\item an isomorphism of vector spaces;
+\item two vector spaces $V$ and $W$ are isomorphic.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+State \textbf{precisely} and \textbf{completely} the definition of the following:
+\begin{enumerate}[label=(\alph*)]
+\item Let $f:A\rightarrow B$ be a function. We say $f$ is one-to-one or injective if for any $a,b\in X$, $f(a)=f(b)$ implies that $a=b$.
+\item Let $f:A\rightarrow B$ be a function. We say $f$ is onto or surjective if for any $y\in Y$, there exists $x\in X$ such that $f(x)=y$.
+\item Let $V$ and $W$ be vector spaces over a field $\F$, and $T:V\rightarrow W$ a linear transformation. We say that $T$ is an isomorphism of vector spaces if $T$ is one-to-one and onto.
+\item Let $V$ and $W$ be vector spaces over a field $\F$. We say that $V$ and $W$ are isomorphic if there exists a isomorphism $T:V\rightarrow W$. In this case, we denote by $V\simeq W$. 
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{2}
+Let $T:\R^{3} \rightarrow P_{2}(\R,x)$ be the function such that for all $(a,b,c)\in \R^{3}$,
+\begin{align*}
+    T(a,b,c)=(a+b)+(a-c)x+cx^{2}.
+\end{align*} 
+Show that $T$ is an isomorphism from $\R^{3}$ to $P_{2}(\R,x)$.
+\end{problem}
+
+\begin{solution}
+Let $T:\R^{3} \rightarrow P_{2}(\R,x)$ be the function defined by
+\begin{align*}
+    T(a,b,c)=(a+b)+(a-c)x+cx^{2}
+\end{align*} 
+for all $(a,b,c)\in \R^{3}$. By definition of isomorphism, if $T$ is an isomorphism, it is a one-to-one and onto linear transformation. First, we will show that $T$  is one-to-one. Choose any $\vec{u},\vec{v}\in \R^{3}$ such that $T(\vec{u})=T(\vec{v})$. Let $\vec{u}=(a_{1},b_{1},c_{1})$ and $\vec{v}=(a_{2},b_{2},c_{2})$ where $a_{1},b_{1},c_{1},a_{2},b_{2},c_{2}\in \R$. We observe by the definition of $T$
+\begin{align*} 
+    T(\vec{u})&=T(\vec{v}), \\
+    T((a_{1},b_{1},c_{1}))&=T((a_{2},b_{2},c_{2})), \\
+    (a_{1}+b_{1})+(a_{1}-c_{1})x+c_{1}x^{2}&=(a_{2}+b_{2})+(a_{2}-c_{2})x+c_{2}x^{2},
+\end{align*}
+which implies the following system of equations:
+\begin{numcases}
+\\
+	a_{1}+b_{1}=a_{2}+b_{2} \\
+	a_{1}-c_{1}=a_{2}-c_{2} \\
+	c_{1}=c_{2} 
+\end{numcases} (3) implies that $c_{1}=c_{2}$. By (2)+(3), we obtain $a_{1}=a_{2}$. Substituting $a_{1}$ into (1), we obtain $a_{2}+b_{1}=a_{2}+b_{2}$, which implies $b_{1}=b_{2}$. Thus, $(a_{1},b_{1},c_{1})=(a_{2},b_{2},c_{2})$ by definition of $\R^{3}$, and $\vec{u}=\vec{v}$. Therefore, by definition of one-to-one, $T$ is one-to-one. Now we will show that $T$ is onto. Choose any $f\in P_{2}(\R,x)$. Let $f=a+bx+cx^2$ for some $a,b,c\in \R$. Now let $\vec{w}=(b+c,a-b-c,c)\in \R^{3}$. We observe
+\begin{align*}
+    T(\vec{w})&=T((b+c,a-b-c,c)) \\
+    &=((b+c)+(a-b-c))+((b+c)-c)x+cx^2, \\
+    &=a+bx+cx^2.
+\end{align*}
+Thus, there exists $\vec{w}\in \R^{3}$ such that $T(\vec{w})=f$. Therefore, by the definition of onto, $T$ is onto. Finally, we will show that $T$ is a linear transformation. Using $\vec{u},\vec{v}\in \R^{3}$ from above, observe
+\begin{footnotesize}
+\begin{align*}
+    T(\vec{u}+\vec{v})&=T((a_{1},b_{1},c_{1})+(a_{2},b_{2},c_{2})), \\
+    &=T((a_{1}+a_{2},b_{1}+b_{2},c_{1}+c_{2})) \text{, by definition of + of $\R^{3}$,} \\
+    &=((a_{1}+a_{2})+(b_{1}+b_{2}))+((a_{1}+a_{2})-(c_{1}+c_{2}))x+(c_{1}+c_{2})x^{2} \text{, by definition of $T$,} \\
+    &=((a_{1}+b_{1})+(a_{2}+b_{2}))+((a_{1}-c_{1})+(a_{2}-c_{2}))x+(c_{1}+c_{2})x^{2},\\
+    &=(a_{1}+b_{1})+(a_{2}+b_{2})+(a_{1}-c_{1})x+(a_{2}-c_{2})x+c_{1}x^2+c_{2}x^2 \text{, by Dist. Law \#2 of $P_{2}(\R,x)$,} \\
+    &=[(a_{1}+b_{1})+(a_{1}-c_{1})x+c_{1}x^2]+[(a_{2}+b_{2})+(a_{2}-c_{2})x+c_{2}x^2] \text {, by asso./comm. of + of $P_{2}(\R,x)$,} \\
+    &=T((a_{1},b_{1},c_{1}))+T((a_{2},b_{2},c_{2})) \text{, by definition of $T$,} \\
+    &=T(\vec{u})+T(\vec{v}).
+\end{align*}
+Thus, $T(\vec{u}+\vec{v})=T(\vec{u})+T(\vec{v})$. Now, for any $\alpha \in \R$, observe
+\begin{align*}
+    T(\alpha \vec{u})&=T(\alpha (a_{1},b_{1},c_{1})), \\
+    &=T((\alpha a_{1},\alpha b_{1},\alpha c_{1})) \text{, by definition of $\cdot$ of $\R^{3}$,} \\
+    &=(\alpha a_{1}+\alpha b_{1})+(\alpha a_{1}-\alpha c_{1})x+\alpha c_{1}x^{2} \text{, by definition of $T$,} \\
+    &=\alpha (a_{1}+b_{1})+\alpha (a_{1}-c_{1})x+\alpha c_{1}x^{2}, \\
+    &=\alpha [(a_{1}+b_{1})+(a_{1}-c_{1})x+c_{1}x^{2}] \text{, by Dist. Law \#1 of $P_{2}(\R,x)$,} \\
+    &=\alpha T((a_{1},b_{1},c_{1})) \text{, by definition of $T$,} \\
+    &=\alpha T(\vec{u}). 
+\end{align*}
+Thus, $T(\alpha \vec{u})=\alpha T(\vec{u})$. Therefore, by the definition of linear transformation, $T$ is a linear transformation. Thus, by the definition of isomorphism, $T$ is an isomorphism. 
+\end{footnotesize}
+\end{solution}
+
+\begin{problem}{3}
+Let $\alpha=\{(1,0),(1,2)\}$ and $\beta=\{(-1,1),(1,1)\}$ be two ordered bases of $\R^{2}$. Let $\vec{u}=(3,-2)$ and $T:\R^{2}\rightarrow \R^{2}$ be the linear transformation such that $T(a,b)=(2a-b,3b)$ for all $(a,b)\in \R^{2}$. Find the following, and justify your answers.
+\begin{enumerate}[label=(\alph*)]
+\item the coordinate vectors $[\vec{u}]_{\alpha}$ and $[\vec{u}]_{\beta}$ of $\vec{u}$,
+\item the matrix representations $[T]^{\beta}_{\alpha},[T]^{\alpha}_{\alpha},[T]^{\alpha}_{\beta},$ and $[\text{Id}]^{\alpha}_{\beta}$, where Id is the identity map of $\R^{2}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+We begin by solving the systems implied by $\vec{u}=(a,b)\in \text{Span}\alpha$ and $\vec{u}=(a,b)\in \text{Span}\beta$. For $\vec{u}=(a,b)\in \text{Span}\alpha$, we observe
+\begin{align*}
+    (a,b)&=c_{1}(1,0)+c_{2}(1,2), \\
+    &=(c_{1},0)+(c_{2},2c_{2}) \text{, by definition of $\cdot$ of $\R^{2}$,} \\
+     &=(c_{1}+c_{2},2c_{2}) \text{, by definition of + of  $\R^{2}$,}
+\end{align*}
+which implies the system of equations
+\begin{numcases} \\
+    c_{1}+c_{2}=a\\
+    2c_{2}=b
+\end{numcases}
+By (2), $c_{2}=\frac{b}{2}$. Substituting $c_{2}$ into (1), we obtain $c_{1}+\frac{b}{2}=a$, which implies that $c_{1}=a-\frac{b}{2}$. Thus, for $\vec{u}=(a,b)\in \text{Span}\alpha$, we have 
+\begin{align}\tag{$\star$}
+\begin{cases}
+    c_{1}=a-\frac{b}{2} \\
+    c_{2}=\frac{b}{2}
+\end{cases}
+\end{align}
+For $\vec{u}=(a,b)\in \text{Span}\beta$, we observe for some $d_{1},d_{2}\in \R$
+\begin{align*}
+    (a,b)&=d_{1}(-1,1)+d_{2}(1,1), \\
+    &=(-d_{1},d_{1})+(d_{2},d_{2}) \text{, by definition of $\cdot$ of $\R^{2}$,} \\
+    &=(-d_{1}+d_{2},d_{1}+d_{2}) \text{, by definition of + of $\R^{2}$,}
+\end{align*}
+which implies the system of equations
+\AtBeginEnvironment{numcases}{\setcounter{equation}{2}}
+\begin{numcases}\\
+    -d_{1}+d_{2}=a \\
+    d_{1}+d_{2}=b
+\end{numcases}
+By (3)+(4), we obtain $2d_{2}=a+b$, which implies $d_{2}=\frac{a+b}{2}$. Substituting $d_{2}$ into (4), we obtain $d_1+\frac{a+b}{2}=b$, which implies $d_{1}=\frac{b-a}{2}$. Thus, for $\vec{u}=(a,b)\in \text{Span}\beta$, we have
+\begin{align}\tag{$\star\star$}
+\begin{cases}
+    d_{1}=\frac{b-a}{2} \\
+    d_{2}=\frac{a+b}{2}
+\end{cases}
+\end{align}
+We will reference ($\star$) and ($\star\star$) in the proceeding questions.
+\begin{enumerate}[label=(\alph*)]
+\item 
+\AtBeginEnvironment{numcases}{\setcounter{equation}{0}}
+First we will obtain the coordinate vector $[\vec{u}]_{\alpha}$. By definition of coordinate vector and ($\star$) with $a=3$ and $b=-2$, we have
+\begin{align*}
+    [\vec{u}]_{\alpha}=\begin{pmatrix} 4 \\ -1 \end{pmatrix}.
+\end{align*}
+Now we will obtain the coordinate vector $[\vec{u}]_{\beta}$. Let $\vec{u}=d_{1}(-1,1)+d_{2}(1,1)$. By definition of coordinate vector and ($\star\star$) with $a=3$ and $b=-2$, we have
+\begin{align*}
+    [\vec{u}]_{\beta}=\begin{pmatrix} -\frac{5}{2} \\ \frac{1}{2} \end{pmatrix}.
+\end{align*}
+\item First we will obtain the matrix representation $[T]^{\beta}_{\alpha}$. Consider $T((1,0))=(2(1)-0,3(0))=(2,0)$ by definition of $T$. By the definition of coordinate vector and ($\star\star$) with $a=2$ and $b=0$, we have
+\begin{align*}
+    [T(1,0)]_{\beta}=\begin{pmatrix} -1 \\ 1 \end{pmatrix}.
+\end{align*}
+Now consider $T((1,2))=(2(1)-2,3(2))=(0,6)$ by definition of $T$. By the definition of coordinate vector and ($\star\star$) with $a=0$ and $b=6$, we have
+\begin{align*}
+    [T(1,2)]_{\beta}=\begin{pmatrix} 3 \\ 3 \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation
+\begin{align*}
+    [T]^{\beta}_{\alpha}=\begin{pmatrix} -1 & 3 \\ 1 & 3\end{pmatrix}.
+\end{align*}
+Next we will obtain the matrix representation $[T]^{\alpha}_{\alpha}$. As shown above, $T((1,0))=(2,0)$ and $T((1,2))=(0,6)$. By the definition of coordinate vector and ($\star$) with $a=2$ and $b=0$, we have
+\begin{align*}
+    [T(1,0)]_{\alpha}=\begin{pmatrix} 2 \\ 0 \end{pmatrix}.
+\end{align*}
+By the definition of coordinate vector and ($\star$) with $a=0$ and $b=6$, we have
+\begin{align*}
+    [T(1,2)]_{\alpha}=\begin{pmatrix} -3 \\ 3 \end{pmatrix}.
+\end{align*}
+Thus, by definition of matrix representation
+\begin{align*}
+    [T]^{\alpha}_{\alpha}=\begin{pmatrix} 2 & -3 \\ 0 & 3\end{pmatrix}.
+\end{align*}
+Now we will obtain the matrix representation $[T]^{\beta}_{\alpha}$. Consider $T((-1,1))=(2(-1)-1,3(1))=(-3,3)$ by definition of $T$. By the definition of coordinate vector and ($\star$) with $a=-3$ and $b=3$, we have 
+\begin{align*}
+    [T(-1,1)]_{\alpha}=\begin{pmatrix} -\frac{9}{2} \\ \frac{3}{2} \end{pmatrix}.
+\end{align*} 
+Now consider $T((1,1))=(2(1)-1,3(1))=(1,3)$ by definition of $T$. By the definition of coordinate vector and ($\star$) with $a=1$ and $b=3$, we have
+\begin{align*}
+    [T(1,1)]_{\alpha}=\begin{pmatrix} -\frac{1}{2} \\ \frac{3}{2} \end{pmatrix}.
+\end{align*} 
+Thus, by the definition of matrix representation
+\begin{align*}
+    [T]^{\alpha}_{\beta}=\begin{pmatrix} -\frac{9}{2} & -\frac{1}{2} \\ \frac{3}{2} & \frac{3}{2} \end{pmatrix}.
+\end{align*}
+Finally we will obtain the matrix representation $[\text{Id}]^{\alpha}_{\beta}$. Consider Id$((-1,1))=(-1,1)$ by definition of Id. By the definition of coordinate vector and ($\star$) with $a=-1$ and $b=1$, we have
+\begin{align*}
+    [\text{Id}(-1,1)]_{\alpha}=\begin{pmatrix} -\frac{3}{2} \\ \frac{1}{2} \end{pmatrix}.
+\end{align*}
+Now consider Id$((1,1))=(1,1)$ by definition of Id. By the definition of coordinate vector and ($\star$) with $a=1$ and $b=1$, we have
+\begin{align*}
+    [\text{Id}(1,1)]_{\alpha}=\begin{pmatrix} \frac{1}{2} \\ \frac{1}{2} \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation
+\begin{align*}
+    [\text{Id}]^{\alpha}_{\beta}=\begin{pmatrix} -\frac{3}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix}.
+\end{align*}
+\end{enumerate}
+\end{solution}
+\end{document}

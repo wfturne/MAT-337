@@ -1,0 +1,300 @@
+\documentclass[12pt,answers]{exam}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz,dcolumn,enumitem,fp,stmaryrd,rotating,etoolbox,cases}
+\usetikzlibrary{decorations.markings}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcolumntype{2}{D{.}{}{2.0}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\setlist[enumerate]{itemsep=0mm}
+\pagestyle{empty}
+\errorcontextlines 10000
+
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+\AtBeginEnvironment{numcases}{\setcounter{equation}{0}}
+\begin{document}
+
+\title{MAT 337 Quiz 6} 
+\author{Billy Turner}
+\maketitle
+\thispagestyle{empty}
+
+\begin{problem}{1}
+State \textbf{precisely} and \textbf{completely} the definition of the following:
+\begin{enumerate}[label=(\alph*)]
+\item an invertible matrix $A$ and its (multiplicative) inverse $A^{-1}$;
+\item an interchange matrix $Q$ of coordinates.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+\item Let $A$ be an $n\times n$ matrix over a field $\F$. We say that $A$ is invertible if there exists an $n\times n$ matrix over $\F$ such that $AB=I_{n}=BA$. In this case, we call $B$ the (multiplicative) inverse of $A$, denoted by $A^{-1}$.
+\item Let $V$ be a vector space over a field $\F$ and $\alpha$ and $\beta$ ordered bases of $V$. We define the interchange matrix of coordinates to be $Q:=[Id_{V}]^{\beta}_{\alpha}$.
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{2}
+Let $\alpha=\{1,x,x^2\}$ and $\beta = \biggl \{ \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} \biggr \}$. \newline Let $S:M_{2\times 2}(\R)\rightarrow M_{2\times 2}(\R)$ be defined by $S(A)=A^{\tau}$, and $T:P_{2}(\R,x)\rightarrow M_{2\times 2}(\R)$ defined by $T(f(x))=\begin{pmatrix} f(0) & f'(1) \\ 0 & f''(-1) \end{pmatrix}$, where $'$ denotes differentiation. Find the following, and justify your answers.
+\begin{enumerate}[label=\roman*)]
+\item the matrix representations $[S]^{\beta}_{\beta},[T]^{\beta}_{\alpha},$ and $[S\circ T|^{\beta}_{\alpha}$;
+\item the coordinates of $[f]_{\alpha}$ and $[T(f)]_{\beta}$ for the polynomial $f=1-2x+x^2\in P_{2}(\R)$;
+\item \textbf{use a different method} to find $[S\circ T|^{\beta}_{\alpha}$ and $[T(f)]_{\beta}$ above.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+We begin by recognizing that $\beta$ is the standard ordered basis for $M_{2\times 2}(\R)$ and rewriting as follows:
+\begin{align*}
+    \beta = \biggl \{ \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} \biggr \}=\{E^{11},E^{12},E^{21},E^{22}\}
+\end{align*}
+where $E^{ij}$ is the matrix whose $ij^{th}$ entry is 1 and all other entries are 0. 
+\begin{enumerate}[label=\roman*)]
+\item We begin by finding $[S]^{\beta}_{\beta}$. First, by definition of $S$, $S(E^{11})=(E^{11})^{\tau}=E^{11}=1\cdot E^{11}+0\cdot E^{12}+0\cdot E^{21}+0\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [S(E^{11})]_{\beta}=\begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \\ \end{pmatrix}.
+\end{align*}
+Now, by definition of $S$, $S(E^{12})=(E^{12})^{\tau}=E^{21}=0\cdot E^{11}+0\cdot E^{12}+1\cdot E^{21}+0\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [S(E^{12})]_{\beta}=\begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \\ \end{pmatrix}.
+\end{align*}
+Now, by definition of $S$, $S(E^{21})=(E^{21})^{\tau}=E^{12}=0\cdot E^{11}+1\cdot E^{12}+0\cdot E^{21}+0\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [S(E^{21})]_{\beta}=\begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \\ \end{pmatrix}.
+\end{align*}
+Now, by definition of $S$, $S(E^{22})=(E^{22})^{\tau}=E^{22}=0\cdot E^{11}+0\cdot E^{12}+0\cdot E^{21}+1\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [S(E^{22})]_{\beta}=\begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \\ \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation, we have
+\begin{align*}
+    [S]^{\beta}_{\beta}=\begin{pmatrix} 1 & 0 & 0 & 0 \\
+                                        0 & 0 & 1 & 0 \\
+                                        0 & 1 & 0 & 0 \\
+                                        0 & 0 & 0 & 1 \end{pmatrix}.
+\end{align*}
+Next we will find $[T]^{\beta}_{\alpha}$. First we will observe that $(1)'=0,(1)''=0,(x)'=1,(x)''=0,(x^2)'=2x$, and $(x^2)''=2$, by the definition of differentiation. We will use these statements below. Now, by definition of $T$, $T(1)=\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}=1\cdot E^{11}+0\cdot E^{12}+0\cdot E^{21}+0\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [T(1)]_{\beta}=\begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \\ \end{pmatrix}.
+\end{align*}
+Now, by definition of $T$, $T(x)=\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}=0\cdot E^{11}+1\cdot E^{12}+0\cdot E^{21}+0\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [T(x)]_{\beta}=\begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \\ \end{pmatrix}.
+\end{align*}
+Now, by definition of $T$, $T(x^2)=\begin{pmatrix} (0)^2 & 2(1) \\ 0 & 2 \end{pmatrix}=\begin{pmatrix} 0 & 2 \\ 0 & 2 \end{pmatrix}=0\cdot E^{11}+2\cdot E^{12}+0\cdot E^{21}+2\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [T(x^2)]_{\beta}=\begin{pmatrix} 0 \\ 2 \\ 0 \\ 2 \\ \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation, we have
+\begin{align*}
+    [T]^{\beta}_{\alpha}=\begin{pmatrix} 1 & 0 & 0 \\
+                                         0 & 1 & 2 \\
+                                         0 & 0 & 0 \\
+                                         0 & 0 & 2 \end{pmatrix}.
+\end{align*} 
+Finally we will find $[S\circ T|^{\beta}_{\alpha}$. First, by definition of $S$ and $T$,  $(S\circ T)(1)=S(T(1))=S\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}=\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}=1\cdot E^{11}+0\cdot E^{12}+0\cdot E^{21}+0\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [(S\circ T)(1)]_{\beta}=\begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \\ \end{pmatrix}.
+\end{align*}
+Now, by definition of $S$ and $T$, $(S\circ T)(x)=S(T(x))=S\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}=\begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}=0\cdot E^{11}+0\cdot E^{12}+1\cdot E^{21}+0\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [(S\circ T)(x)]_{\beta}=\begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \\ \end{pmatrix}.
+\end{align*}
+Now, by definition of $S$ and $T$, $(S\circ T)(x^2)=S(T(x^2))=S\begin{pmatrix} 0 & 2 \\ 0 & 2 \end{pmatrix}=\begin{pmatrix} 0 & 2 \\ 0 & 2 \end{pmatrix}^{\tau}=\begin{pmatrix} 0 & 0 \\ 2 & 2 \end{pmatrix}=0\cdot E^{11}+0\cdot E^{12}+2\cdot E^{21}+2\cdot E^{22}$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [(S\circ T)(x^2)]_{\beta}=\begin{pmatrix} 0 \\ 0 \\ 2 \\ 2 \\ \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation, we have
+\begin{align*}
+    [(S\circ T)]^{\beta}_{\alpha}=\begin{pmatrix} 1 & 0 & 0 \\
+                                                  0 & 0 & 0 \\
+                                                  0 & 1 & 2 \\
+                                                  0 & 0 & 2 \end{pmatrix}.
+\end{align*} 
+\item First we will observe that $f'=-2+2x$ and $f''=2$. We will use these statements below. Now $f=1-2x+x^2=1(1)+(-2)(x)+(1)(x^2)$. Therefore, by the definition of coordinate vector, we have
+\begin{align*}
+    [f]_{\alpha}=\begin{pmatrix} 1 \\ -2 \\ 1\end{pmatrix}.
+\end{align*}
+Now, by definition of $T$, $T(f)=T(1-2x+x^2)=\begin{pmatrix} 1-2(0)+(0)^2 & -2+2(1) \\ 0 & 2 \end{pmatrix}=\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}=1\cdot E^{11}+0\cdot E^{12}+0\cdot E^{21}+2\cdot E^{22}$. Therefore, by the definition of coordinate vector, we have
+\begin{align*}
+    [T(f)]_{\beta}=\begin{pmatrix} 1 \\ 0 \\ 0 \\ 2\end{pmatrix}.
+\end{align*}
+\item First we will find $[S\circ T]^{\beta}_{\alpha}$. By a theorem proved previously, $[S\circ T]^{\beta}_{\alpha}=[S]^{\beta}_{\beta}[T]^{\beta}_{\alpha}$, so we observe
+\begin{footnotesize}
+\begin{align*}
+    [S\circ T]^{\beta}_{\alpha}&=[S]^{\beta}_{\beta}[T]^{\beta}_{\alpha}, \\
+    &=\begin{pmatrix} 1 & 0 & 0 & 0 \\
+                      0 & 0 & 1 & 0 \\
+                      0 & 1 & 0 & 0 \\
+                      0 & 0 & 0 & 1 \end{pmatrix}
+      \begin{pmatrix} 1 & 0 & 0 \\
+                      0 & 1 & 2 \\
+                      0 & 0 & 0 \\
+                      0 & 0 & 2 \end{pmatrix},\\
+    &=\begin{pmatrix} 1(1)+0(0)+0(0)+0(0) & 1(0)+0(1)+0(0)+0(0) & 1(0)+0(2)+0(0)+0(2) \\
+                      0 & 0 & 0 \\
+                      0 & 1 & 2 \\
+                      0 & 0 & 2 \end{pmatrix} \\
+    &=\begin{pmatrix} 1 & 0 & 0 \\
+                      0 & 0 & 0 \\
+                      0 & 1 & 2 \\
+                      0 & 0 & 2 \end{pmatrix}.
+\end{align*}
+\end{footnotesize} 
+Now we will find $[T(f)]_{\beta}$. By a theorem proved previously,  $[T(f)]_{\beta}=[T]^{\beta}_{\alpha}[f]_{\alpha}$, so we observe
+\begin{align*}
+    [T(f)]_{\beta}&=[T]^{\beta}_{\alpha}[f]_{\alpha} \\
+    &=\begin{pmatrix} 1 & 0 & 0 \\
+                      0 & 1 & 2 \\
+                      0 & 0 & 0 \\
+                      0 & 0 & 2 \end{pmatrix}
+      \begin{pmatrix} 1 \\ -2 \\ 1 \end{pmatrix} \\
+    &=\begin{pmatrix} 1(1)+0(-2)+0(1) \\ 0 \\ 0 \\ 2 \end{pmatrix}\\
+    &=\begin{pmatrix} 1 \\ 0 \\ 0 \\ 2 \end{pmatrix}.
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{3}
+Let $\alpha=\{1,x,x^2\}$ and $\beta=\{1-x,x,x+x^2\}$ (ordered bases of $P_{2}(\R,x)$). Let $T:P_{2}(\R,x)\rightarrow P_{2}(\R,x)$ be the linear transformation defined by $T(f)=f-2xf'$.
+\begin{enumerate}[label=\roman*)]
+\item Find the matrix representations $[T]^{\beta}_{\beta}$ and $[T]^{\alpha}_{\alpha}$.
+\item FInd the interchange matrix of coordinates $Q=[Id_{V}]^{\beta}_{\alpha}$ and also its inverse $Q^{-1}$. 
+\item \textbf{Use a different method} to find $[T]^{\beta}_{\beta}$ in terms of $Q$ and $[T]^{\alpha}_{\alpha}$ obtained above.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=\roman*)]
+\item To begin we will solve the system implied by $a+bx+cx^{2}\in$ Span$\beta$, where $a+bx+cx^{2}\in P_{2}(\R,x)$. Consider
+\begin{align*}
+    a+bx+cx^2&=d_{1}(1-x)+d_{2}(x)+d_{3}(x+x^{2}), \\
+    &=d_{1}-d_{1}x+d_{2}x+d_{3}x+d_{3}x^{2} \text{, by Dist. Law \#1 of $P_{2}(\R,x)$}, \\
+    &=d_{1}+(-d_{1}+d_{2}+d_{3})x+d_{3}x_{2} \text{, by definition of + of $P_{2}(\R,x)$},
+\end{align*}
+which implies the system of equations
+\begin{numcases} \\
+    d_{1}=a \\
+    -d_{1}+d_{2}+d_{3}=b \\
+    d_{3}=c
+\end{numcases}
+By substituting (1) and (3) into (2), we obtain $-a+d_{2}+c=b$, which implies $d_{2}=a+b-c$. Thus we have
+\begin{align} \tag{$\star$}
+\begin{cases}
+    d_{1}=a \\
+    d_{2}=a+b-c \\
+    d_{3}=c
+\end{cases}
+\end{align}
+We will reference ($\star$) in the proceeding questions. First we will find $[T]^{\beta}_{\beta}$. Now, by definition of $T$,  $T(1-x)=(1-x)-2x(-1)=(1-x)+2x=1+x$. Therefore, by the definition of coordinate vector and ($\star$) with $a=1,b=1,$ and $c=0,$ we have
+\begin{align*}
+    [T(1-x)]_{\beta}=\begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}.
+\end{align*}
+Now, by definition of $T$, $T(x)=x-2x(1)=x-2x=-x$. Therefore, by the definition of coordinate vector and ($\star$) with $a=0,b=-1,$ and $c=0,$ we have
+\begin{align*}
+    [T(x)]_{\beta}=\begin{pmatrix} 0 \\ -1 \\ 0 \end{pmatrix}.
+\end{align*}
+Now, by definition of $T$, $T(x+x^{2})=(x+x^{2})-2x(1+2x)=(x+x^{2})+(-2x-4x^{2})=-x-3x^{2}$. Therefore, by the definition of coordinate vector and ($\star$) with $a=0,b=-1,$ and $c=-3,$ we have
+\begin{align*}
+    [T(x+x^{2})]_{\beta}=\begin{pmatrix} 0 \\ 2 \\ -3 \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation, we have
+\begin{align*}
+    [T]^{\beta}_{\beta}=\begin{pmatrix} 1 & 0 & 0 \\
+                                        2 & -1 & 2 \\
+                                        0 & 0 & -3 \end{pmatrix}.
+\end{align*}
+Next we will find $[T]^{\alpha}_{\alpha}$. Now, by definition of $T$, $T(1)=1-2x(0)=1=1(1)+0(x)+0(x^{2})$. Therefore, by the definition of coordinate vector
+\begin{align*}
+    [T(1)]_{\alpha}=\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}.
+\end{align*}
+Now, by definition of $T$, $T(x)=x-2x(1)=x-2x=-x=0(1)+(-1)(x)+0(x^{2})$. Therefore, by the definition of coordinate vector
+\begin{align*}
+    [T(x)]_{\alpha}=\begin{pmatrix} 0 \\ -1 \\ 0 \end{pmatrix}.
+\end{align*}
+Now, by definition of $T$, $T(x^{2})=x^{2}-2x(2x)=x^{2}-4x^{2}=-3x^{2}=0(1)+0(x)+(-3)(x^{2})$. Therefore, by the definition of coordinate vector
+\begin{align*}
+    [T(x^{2})]_{\alpha}=\begin{pmatrix} 0 \\ 0 \\ -3 \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation, we have
+\begin{align*}
+    [T]^{\alpha}_{\alpha}=\begin{pmatrix} 1 & 0 & 0 \\
+                                          0 & -1 & 0 \\
+                                          0 & 0 & -3 \end{pmatrix}.
+\end{align*}
+\item  We will begin by finding $Q=[Id]^{\beta}_{\alpha}$. Now $Id(1)=1$ by definition of $Id$. Therefore, by the definition of coordinate vector and ($\star$) with $a=1,b=0,$ and $c=0,$ we have
+\begin{align*}
+    [Id(1)]_{\beta}=\begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}.
+\end{align*}
+Now $Id(x)=x$ by definition of $Id$. Therefore, by the definition of coordinate vector and ($\star$) with $a=0,b=1,$ and $c=0,$ we have
+\begin{align*}
+    [Id(x)]_{\beta}=\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}.
+\end{align*}
+Now $Id(x^{2})=x^{2}$ by definition of $Id$. Therefore, by the definition of coordinate vector and ($\star$) with $a=0,b=0,$ and $c=1,$ we have
+\begin{align*}
+    [Id(x^{2})]_{\beta}=\begin{pmatrix} 0 \\ -1 \\ 1 \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation, we have
+\begin{align*}
+    Q=[Id]^{\beta}_{\alpha}=\begin{pmatrix} 1 & 0 & 0 \\
+                                            1 & 1 & -1 \\
+                                            0 & 0 & 1 \end{pmatrix}.
+\end{align*}
+Now we will find $([Id]^{\beta}_{\alpha})^{-1}$. Recalling a theorem proved previously ($T$ is an isomorphism if and only if $([T]^{\beta}_{\alpha})^{-1}=[T^{-1}]^{\alpha}_{\beta}$.), since $Id$ is an isomorphism, we have $Q^{-1}=([Id]^{\beta}_{\alpha})^{-1}=([Id^{-1}]^{\beta}_{\alpha})=[Id]^{\alpha}_{\beta}$. Now $Id(1-x)=1-x=1(1)+(-1)x+0(x^{2})$ by definition of $Id$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [Id(1-x)]_{\alpha}=\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix}.
+\end{align*}
+Now $Id(x)=x=0(1)+1x+0(x^{2})$ by definition of $Id$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [Id(x)]_{\alpha}=\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}.
+\end{align*}
+Now $Id(x+x^{2})=x=0(1)+1x+1(x^{2})$ by definition of $Id$. Therefore by the definition of coordinate vector
+\begin{align*}
+    [Id(x+x^{2})]_{\alpha}=\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}.
+\end{align*}
+Thus, by the definition of matrix representation, we have
+\begin{align*}
+    Q^{-1}=[Id]^{\alpha}_{\beta}=\begin{pmatrix} 1 & 0 & 0 \\
+                                                 -1 & 1 & 1 \\
+                                                 0 & 0 & 1 \end{pmatrix}.
+\end{align*}
+\item By a theorem proved previously, $[T]^{\beta}_{\beta}=Q[T]^{\alpha}_{\alpha}Q^{-1}$, or $[T]^{\alpha}_{\alpha}$ and $[T]^{\beta}_{\beta}$ are conjugates. Thus, we observe
+\begin{align*}
+    [T]^{\beta}_{\beta}&=Q[T]^{\alpha}_{\alpha}Q^{-1}, \\
+    &=[Id]^{\beta}_{\alpha}[T]^{\alpha}_{\alpha}[Id]^{\alpha}_{\beta}, \\
+    &=\begin{pmatrix} 1 & 0 & 0 \\
+                      1 & 1 & -1 \\
+                      0 & 0 & 1 \end{pmatrix} 
+      \begin{pmatrix} 1 & 0 & 0 \\
+                      0 & -1 & 0 \\
+                      0 & 0 & -3 \end{pmatrix}
+      \begin{pmatrix} 1 & 0 & 0 \\
+                     -1 & 1 & 1 \\
+                      0 & 0 & 1 \end{pmatrix}, \\
+    &=\begin{pmatrix} 1(1)+0(0)+0(0) & 1(0)+0(-1)+0(0) & 1(0)+0(0)+0(-3) \\
+                      1 & -1 & 3 \\
+                      0 & 0 & -3 \end{pmatrix}
+      \begin{pmatrix} 1 & 0 & 0 \\
+                     -1 & 1 & 1 \\
+                      0 & 0 & 1 \end{pmatrix}, \\  
+    &=\begin{pmatrix} 1 & 0 & 0 \\
+                      1 & -1 & 3 \\
+                      0 & 0 & -3 \end{pmatrix}
+      \begin{pmatrix} 1 & 0 & 0 \\
+                     -1 & 1 & 1 \\
+                      0 & 0 & 1 \end{pmatrix}, \\
+    &=\begin{pmatrix} 1(1)+0(-1)+0(0) & 1(0)+0(1)+0(0) & 1(0)+0(1)+0(1) \\
+                      2 & -1 & 2 \\
+                      0 & 0 & -3 \end{pmatrix}, \\
+    &=\begin{pmatrix} 1 & 0 & 0 \\
+                      2 & -1 & 2 \\
+                      0 & 0 & -3 \end{pmatrix}.
+\end{align*}
+\end{enumerate}
+\end{solution}
+\end{document}
